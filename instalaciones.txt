@@ -1,0 +1,5 @@
+npm i -D typescript
+npm i ts-node -D //desarrollo
+
+npx tsc --version
+npx tsc --init
