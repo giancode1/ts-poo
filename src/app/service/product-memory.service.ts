@@ -6,6 +6,10 @@ import { CreateProductDto, UpdateProductDto } from '../dtos/product.dto';
 export class ProductMemoyService {
   private products: Product[] = [];
 
+  getAll(){
+    return this.products;
+  }
+
   create(data: CreateProductDto): Product {
     const newProduct = {
       ...data,
