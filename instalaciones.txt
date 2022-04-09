@@ -3,3 +3,6 @@ npm i ts-node -D //desarrollo
 
 npx tsc --version
 npx tsc --init
+
+//habilitar decoradores:
+experimentalDecorators: true

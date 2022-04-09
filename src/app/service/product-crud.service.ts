@@ -3,6 +3,7 @@ import { UpdateProductDto } from '../dtos/product.dto';
 import { ProductHttpService } from './product-http2-service';
 import { BaseHttpService } from '../base-http.service';
 import { threadId } from 'worker_threads';
+import { validate } from 'class-validator';
 
 export class ProductCRUDService {
   private url = 'https://api.escuelajs.co/api/v1/products';
@@ -12,6 +13,8 @@ export class ProductCRUDService {
   async update(id: Product['id'], dto: UpdateProductDto){
     //permisos
     //logica
+    //validacion
+    //validate(dto)
     this.http.otroRequest() //ya tienes todo del basehttp mas el otro request que fue una extension de esa base
     return this.http.update(id, dto);
   }
