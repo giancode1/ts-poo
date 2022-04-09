@@ -6,3 +6,5 @@ npx tsc --init
 
 //habilitar decoradores:
 experimentalDecorators: true
+//puedes decorar clases, propiedades, métodos, parámetros, etc.
+//agrega validacion extra
