@@ -1,33 +1,27 @@
+//GENERICOS
 import axios from 'axios';
 
 import { Category } from './models/category.model'
 import { Product } from './models/product.model';
+import { UpdateProductDto } from './dtos/product.dto';
 
 export class BaseHttpService<TypeClass>{
-  //data: TypeClass[] = [];  //ejm: data:number[] o data:string[]  y asi
+  constructor(protected url: string) { }
 
-  constructor(private url: string) { }
-
-
-  // async getAll(): Promise<TypeClass[]> {
   async getAll() {
     const { data } = await axios.get<TypeClass[]>(this.url);
     return data;
   }
+
+  async update<ID, DTO>(id: ID, changes: DTO) {
+    const { data } = await axios.put(`${this.url}/${id}`, changes);
+    return data;
+  }
 }
 
-// const service = new BaseHttpService<string>()
-// service.data //me da el tipado de string[]
-// service.getAll()
-
-// const service1 = new BaseHttpService<number>()
-// service1.data //me da el tipado de number[]
-
-// const service2 = new BaseHttpService<Category>()
-// service2.data //me da el tipado de number[]
 
 (async ()=>{
-//LO IMPORTANTE DE ESTO ESQUE NO FUE NECESRIO CONSTRUIR UN
+//LO IMPORTANTE DE ESTO ESQUE NO FUE NECESARIO CONSTRUIR UN:
 //ProductServiHttp o CategoryServiceHttp
 //el lo coje de manera generica, y podemos mandar el tipado que esperamos
 
@@ -36,6 +30,9 @@ export class BaseHttpService<TypeClass>{
 
   const rta = await productsService.getAll();
   console.log('products', rta.length);
+  productsService.update<Product['id'], UpdateProductDto>(1, {
+    title: 'nuevo nombre',
+  });
 
   //
   const url2 = 'https://api.escuelajs.co/api/v1/categories';
@@ -43,6 +40,8 @@ export class BaseHttpService<TypeClass>{
 
   const rta1 = await categoryService.getAll();
   console.log('categories', rta1.length);
+
+
 })()
 
 
